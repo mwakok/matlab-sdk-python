@@ -21,5 +21,3 @@ jobs:
           release: R2023a
       - name: Run build
         uses: matlab-actions/run-build@v1
-        with:
-          tasks: mytask
