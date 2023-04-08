@@ -19,5 +19,5 @@ jobs:
         uses: matlab-actions/setup-matlab@v1
         with:
           release: R2023a
-      - name: Run build
-        uses: matlab-actions/run-build@v1
+#       - name: Run build
+#         uses: matlab-actions/run-build@v1
