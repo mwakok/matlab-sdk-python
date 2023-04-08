@@ -1,6 +1,8 @@
 # User-defined
 PythonWrapper
 
+.buildtool
+
 # Windows default autosave extension
 *.asv
 
