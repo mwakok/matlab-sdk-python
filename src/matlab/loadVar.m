@@ -1,6 +1,10 @@
-function var = loadMatlabVars(file, varName)
-% Load variables from a file and assign them to the base workspace
-S = load(file);
+function var = loadVar(filepath, varName)
+% Function to load variables from a file and assign them to the base workspace
+% Inputs:
+%   filepath: the path of the Matlab variable to load
+%   varName: the name of the variable to use when loading
+
+S = load(filepath);
 var = S.(varName);
 varNames = fieldnames(S);
 for i = 1:length(varNames)

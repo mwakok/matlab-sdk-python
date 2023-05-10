@@ -1,4 +1,4 @@
-function saveMatlabVars(var, varname, filename)
+function saveVar(var, varname, filename)
 % Function to save a variable to a file with a specified name
 % Inputs:
 %   var: the variable to save
