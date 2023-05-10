@@ -22,7 +22,7 @@ end
 
 function compileTask(~)
 % Compile Python package
-appFiles = {'callFunction.m', 'callMethod.m', 'loadMatlabVars.m', 'saveMatlabVars.m'};
+appFiles = {'call.m', 'loadVar.m', 'saveVar.m'};
 f = fullfile('src', 'matlab', appFiles);
 opts = compiler.build.PythonPackageOptions(f,...
     'OutputDir','PythonWrapper',...
