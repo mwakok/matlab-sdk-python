@@ -18,9 +18,10 @@ jobs:
       - name: Check docker image
         run: |
           docker image ls | grep matlab
+      - name: Create license file
+        run: echo {{ secrets.MATLAB_LICENSE}} > ./license.lic 
       - name: Test Matlab image
         run: |
-          echo {{ secrets.MATLAB_LICENSE}} > ./license.lic \
           docker run --rm -v $(pwd)/license.lic:/opt/matlab/licenses/license.lic matlab:r2023a matlab -batch "disp(2+2)"
 
 
