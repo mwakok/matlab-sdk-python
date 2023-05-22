@@ -20,8 +20,8 @@ jobs:
           docker image ls | grep matlab
       - name: Create license file
         run: |
-          mkdir ./licenses
-          echo $MATLAB_LICENSE >> ./licenses/license.lic
+          mkdir $(pwd)/licenses
+          echo $MATLAB_LICENSE >> $(pwd)/licenses/license.lic
         shell: bash
         env:
           MATLAB_LICENSE : ${{ secrets.MATLAB_LICENSE }}
