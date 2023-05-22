@@ -25,7 +25,7 @@ jobs:
         with:
           image: mwakok/matlab:r2023a
           options: |
-            -mac--address 02:42:ac:11:ff:ff \
+            --mac--address 02:42:ac:11:ff:ff \
             -v $(pwd)/licenses:/opt/matlab/licenses
           run: |
             matlab -batch "disp(2+2)"
