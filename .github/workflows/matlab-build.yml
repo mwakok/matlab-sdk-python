@@ -29,6 +29,11 @@ jobs:
         run: |
           ls ./licenses
           cat licenses/license.lic
+      - name: Check license file in container
+        run: |
+          docker run --rm \
+          -v $(pwd)/licenses:/opt/matlab/licenses \
+          matlab:r2023a bash "ls /opt/matlab/licenses"
       - name: Test Matlab image
         run: |
           docker run --rm \
