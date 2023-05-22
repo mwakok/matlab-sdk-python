@@ -32,7 +32,7 @@ jobs:
       - name: Check docker volume mount
         run: |
           docker run --rm \
-          -v $(pwd)/src:/opt/matlab/licenses \
+          -v /$(pwd)/src:/opt/matlab/licenses \
           matlab:r2023a bash -c "ls /opt/matlab/licenses"
       - name: Check license file in container
         run: |
