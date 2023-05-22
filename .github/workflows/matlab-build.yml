@@ -20,7 +20,8 @@ jobs:
           docker image ls | grep matlab
       - name: Create license file
         run: |
-          echo $MATLAB_LICENSE >> ./license.lic
+          mkdir ./licenses
+          echo $MATLAB_LICENSE >> ./licenses/license.lic
         shell: bash
         env:
           MATLAB_LICENSE : ${{ secrets.MATLAB_LICENSE }}
@@ -32,7 +33,7 @@ jobs:
         run: |
           docker run --rm \
           --mac-address 02:42:ac:11:ff:ff \
-          --mount type=bind,source=$(pwd)/license.lic,target=/opt/matlab/licenses/ \
+          --mount type=bind,source=$(pwd)/licenses,target=/opt/matlab/licenses/ \
           matlab:r2023a matlab -batch "disp(2+2)"
 
 
