@@ -27,8 +27,8 @@ jobs:
           MATLAB_LICENSE : ${{ secrets.MATLAB_LICENSE }}
       - name: Verify license
         run: |
-          ls -l
-          cat license.lic
+          ls ./licenses
+          cat licenses/license.lic
       - name: Test Matlab image
         run: |
           docker run --rm \
