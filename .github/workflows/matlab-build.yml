@@ -26,13 +26,13 @@ jobs:
           MATLAB_LICENSE : ${{ secrets.MATLAB_LICENSE }}
       - name: Verify license
         run: |
-          ls
+          ls -l
           cat license.lic
       - name: Test Matlab image
         run: |
           docker run --rm \
           --mac-address 02:42:ac:11:ff:ff \
-          --mount type=bind,source="$(pwd)"/license.lic,target=/opt/matlab/licenses/license.lic \
+          --mount type=bind,source=$(pwd)/license.lic,target=/opt/matlab/licenses/ \
           matlab:r2023a matlab -batch "disp(2+2)"
 
 
