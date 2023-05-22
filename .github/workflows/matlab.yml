@@ -1,0 +1,31 @@
+name: Run MATLAB Tests on GitHub-Hosted Runner
+on:
+  workflow_dispatch:
+
+jobs:
+  my-job:
+    name: Run MATLAB Compiler SDK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Create license file
+        run: |
+          mkdir $(pwd)/licenses
+          echo $MATLAB_LICENSE >> $(pwd)/licenses/license.lic
+        shell: bash
+        env:
+          MATLAB_LICENSE : ${{ secrets.MATLAB_LICENSE }}
+      - name: Verify license
+        run: |
+          ls ./licenses
+          cat licenses/license.lic
+      - name: Run the build process with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+          image: mwakok/matlab:r2023a
+          options: |
+            -mac--address 02:42:ac:11:ff:ff \
+            -v $(pwd)/licenses:/opt/matlab/licenses
+          run: |
+            matlab -batch "disp(2+2)"
