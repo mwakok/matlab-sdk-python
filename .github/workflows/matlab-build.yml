@@ -33,7 +33,7 @@ jobs:
         run: |
           docker run --rm \
           --mac-address 02:42:ac:11:ff:ff \
-          -v $(pwd)/licenses:/opt/matlab/licenses
+          -v $(pwd)/licenses:/opt/matlab/licenses \
           matlab:r2023a matlab -batch "disp(2+2)"
 
 
