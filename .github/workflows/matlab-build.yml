@@ -32,13 +32,13 @@ jobs:
       - name: Check license file in container
         run: |
           docker run --rm \
-          -v ./licenses:/opt/matlab/licenses \
+          -v $(pwd)/licenses:/opt/matlab/licenses \
           matlab:r2023a bash -c "ls /opt/matlab/licenses"
       - name: Test Matlab image
         run: |
           docker run --rm \
           --mac-address 02:42:ac:11:ff:ff \
-          -v ./licenses:/opt/matlab/licenses \
+          -v $(pwd)/licenses:/opt/matlab/licenses \
           matlab:r2023a matlab -batch "disp(2+2)"
 
 
