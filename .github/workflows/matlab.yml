@@ -12,7 +12,7 @@ jobs:
       - name: Create license file
         run: |
           mkdir $(pwd)/licenses
-          echo $MATLAB_LICENSE >> ${{ github.workspace }}/licenses/license.lic
+          echo $MATLAB_LICENSE | base 64 -d > ${{ github.workspace }}/licenses/license.lic
         shell: bash
         env:
           MATLAB_LICENSE : ${{ secrets.MATLAB_LICENSE }}
