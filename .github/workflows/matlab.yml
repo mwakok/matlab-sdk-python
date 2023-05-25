@@ -20,7 +20,7 @@ jobs:
         run: |
           ls ./licenses
           cat licenses/license.lic
-      - name: Run the build process with Docker
+      - name: Test Matlab 
         uses: addnab/docker-run-action@v3
         with:
           image: mwakok/matlab:r2023a
@@ -28,3 +28,11 @@ jobs:
             --mac-address 02:42:ac:11:ff:ff -v ${{ github.workspace }}/licenses:/opt/matlab/licenses
           run: |
             matlab -batch "disp(2+2)"
+      - name: Run the build process with Docker
+        uses: addnab/docker-run-action@v3
+        with:
+          image: mwakok/matlab:r2023a
+          options: |
+            --mac-address 02:42:ac:11:ff:ff -v ${{ github.workspace }}/licenses:/opt/matlab/licenses -v ${{ github.workspace }}:/opt/src
+          run: |
+            matlab -batch "buildtool"
