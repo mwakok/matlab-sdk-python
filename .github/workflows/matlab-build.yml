@@ -27,6 +27,7 @@ jobs:
         run: |
           docker run --rm \
           -v ${{ github.workspace }}/licenses:/opt/matlab/licenses \
+          -v /var/run/docker.sock:/var/run/docker.sock \
           matlab:r2023a bash -c "ls /opt/matlab/licenses"
       - name: Test Matlab image
         run: |
