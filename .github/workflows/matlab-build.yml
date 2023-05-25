@@ -20,8 +20,8 @@ jobs:
           docker image ls | grep matlab
       - name: Create license file
         run: |
-          mkdir $(pwd)/licenses
-          echo $MATLAB_LICENSE >> $(pwd)/licenses/license.lic
+          mkdir ${{ github.workspace }}/licenses
+          echo $MATLAB_LICENSE >> ${{ github.workspace }}/licenses/license.lic
         shell: bash
         env:
           MATLAB_LICENSE : ${{ secrets.MATLAB_LICENSE }}
@@ -32,18 +32,18 @@ jobs:
       - name: Check docker volume mount
         run: |
           docker run --rm \
-          -v /$(pwd)/src:/opt/matlab/licenses \
+          -v ${{ github.workspace }}/src:/opt/matlab/licenses \
           matlab:r2023a bash -c "ls /opt/matlab/licenses"
       - name: Check license file in container
         run: |
           docker run --rm \
-          -v $(pwd)/licenses:/opt/matlab/licenses \
+          -v ${{ github.workspace }}/licenses:/opt/matlab/licenses \
           matlab:r2023a bash -c "ls /opt/matlab/licenses"
       - name: Test Matlab image
         run: |
           docker run --rm \
           --mac-address 02:42:ac:11:ff:ff \
-          -v $(pwd)/licenses:/opt/matlab/licenses \
+          -v ${{ github.workspace }}/licenses:/opt/matlab/licenses \
           matlab:r2023a matlab -batch "disp(2+2)"
 
 
