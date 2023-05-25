@@ -1,12 +1,6 @@
 name: Run MATLAB Tests on GitHub-Hosted Runner
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
   my-job:
@@ -21,7 +15,7 @@ jobs:
       - name: Create license file
         run: |
           mkdir ${{ github.workspace }}/licenses
-          echo $MATLAB_LICENSE >> ${{ github.workspace }}/licenses/license.lic
+          echo "$MATLAB_LICENSE" > ${{ github.workspace }}/licenses/license.lic
         shell: bash
         env:
           MATLAB_LICENSE : ${{ secrets.MATLAB_LICENSE }}
@@ -29,12 +23,7 @@ jobs:
         run: |
           ls ./licenses
           cat licenses/license.lic
-      - name: Check docker volume mount
-        run: |
-          docker run --rm \
-          -v ${{ github.workspace }}/src:/opt/matlab/licenses \
-          matlab:r2023a bash -c "ls /opt/matlab/licenses"
-      - name: Check license file in container
+      - name: Check mounting of license file in container
         run: |
           docker run --rm \
           -v ${{ github.workspace }}/licenses:/opt/matlab/licenses \
@@ -45,5 +34,3 @@ jobs:
           --mac-address 02:42:ac:11:ff:ff \
           -v ${{ github.workspace }}/licenses:/opt/matlab/licenses \
           matlab:r2023a matlab -batch "disp(2+2)"
-
-
