@@ -12,7 +12,7 @@ jobs:
       - name: Create license file
         run: |
           mkdir $(pwd)/licenses
-          echo $MATLAB_LICENSE >> $GITHUB_WORKSPACE/licenses/license.lic
+          echo $MATLAB_LICENSE >> ${{ github.workspace }}/licenses/license.lic
         shell: bash
         env:
           MATLAB_LICENSE : ${{ secrets.MATLAB_LICENSE }}
@@ -25,6 +25,6 @@ jobs:
         with:
           image: mwakok/matlab:r2023a
           options: |
-            --mac-address 02:42:ac:11:ff:ff -v $GITHUB_WORKSPACE/licenses:/opt/matlab/licenses
+            --mac-address 02:42:ac:11:ff:ff -v ${{ github.workspace }}/licenses:/opt/matlab/licenses
           run: |
             matlab -batch "disp(2+2)"
